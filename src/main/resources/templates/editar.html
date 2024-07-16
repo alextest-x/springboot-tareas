@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--agrega el fragmento cabecero -->
+<head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Agregar')}">
+</head>
+
+<body>
+
+<div th:replace="~{fragmentos/navegacion::navegacion-seccion}"></div>
+
+<div class="container">
+     <div   class="container text-center" style="margin:30px">
+         <h3>Agregar Contacto</h3>
+     </div>
+
+    <div class="container">
+           <!-- modelAttribute="contactoForma" lleva la informacion del formulario  el valor del input text
+             nombre,    celular, email
+              <form action="/editar" modelAttribute="contactoForma" method="post">
+              modelAttribute="contactoForma" solo se pone sino tenemos un objeto que viene desde el controlador
+
+              th:object="${contacto}" => muestra la informacion que queremos editar en el formulario
+              viene en el model.put("contacto" contacto)
+
+
+               recibiendo un objeto desde el controlador
+           th:field="*{idContacto}" * hace referencia al objeto que estamos usando
+           en el formulario para especificar el atributo de este objeto que estamos usando
+
+            hace referencia que es un atributo de tipo conctacto nombre
+           -->
+
+
+        <form action="/editar" th:object="${contacto}" method="post">
+        <!-- sino se pone se inserta de nuevo -->
+            <input type="hidden" th:field="*{idContacto}">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required="true" th:field="*{nombre}">
+            </div>
+
+            <div class="mb-3">
+                <label for="celular" class="form-label">Celular</label>
+                <input type="text" class="form-control" id="celular" name="celular" th:field="*{celular}">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning btn-sm me-3">Editar</button>
+                <a href="/" class="btn btn-danger btn-sm">Regresar</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<body>
+
+<!--agrega el fragmento de pie de pagina -->
+<div th:replace="~{fragmentos/pie-pagina::pie-pagina-seccion}"></div>
+
+
+</body>
+</html>
